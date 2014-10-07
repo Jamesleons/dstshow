@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block body %}
+  <ul class=dstshows>
+  {% for dstshow in dstshows %}
+    <li><h2>{{ dstshow.processed }}</h2>{{ dstshow.processed|safe }}
+  {% else %}
+    <li><em>Unbelievable.  No entries here so far</em>
+  {% endfor %}
+  </ul>
+{% endblock %}
