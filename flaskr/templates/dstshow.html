@@ -1,10 +1,36 @@
-{% extends "layout.html" %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta http-equiv="refresh" content="60"> 
+    <!-- Bootstrap core CSS -->
+    <link href="http://v3.bootcss.com/dist/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="http://v3.bootcss.com/examples/jumbotron/jumbotron.css" rel="stylesheet">
+  </head>
+
+
 {% block body %}
-  <ul class=dstshows>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="col-md-12">
+  <table class="table-striped">
   {% for dstshow in dstshows %}
-    <li><h2>{{ dstshow.processed }}</h2>{{ dstshow.processed|safe }}
+    <tbody>
+      <tr>
+      <td>
+        <span style="color:green;margin-right:2px; font-size:14px">{{ dstshow.processed }}:</span>
+        <span style="color:green;margin-right:2px; font-size:14px">{{ dstshow.unprocessed|safe }}</span>
+      </td>
+      </tr>
+    </tbody>
   {% else %}
-    <li><em>Unbelievable.  No entries here so far</em>
+    <em>Unbelievable.  No entries here so far</em>
   {% endfor %}
-  </ul>
+  </table>
+  </div>
+  </div>
+</div>
 {% endblock %}
+
+</html>
