@@ -33,8 +33,8 @@ def teardown_request(exception):
 
 @app.route("/")
 def show_entries():
-    cur = g.db.execute('select processed, unprocessed  from dstshow')
-    dstshows = [dict(processed=row[0], unprocessed=row[1]) for row in cur.fetchall()]
+    cur = g.db.execute('select ptime, username, reply  from dstshow')
+    dstshows = [dict(ptime=row[0], username=row[1],reply=row[2]) for row in cur.fetchall()]
     return render_template('dstshow.html', dstshows=dstshows)
 
 
