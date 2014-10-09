@@ -1,6 +1,7 @@
 drop table if exists dstshow;
 create table dstshow (
   id integer primary key autoincrement,
-  processed int not null,
-  unprocessed int not null
+  ptime string not null,
+  username string not null,
+  reply string not null
 );
