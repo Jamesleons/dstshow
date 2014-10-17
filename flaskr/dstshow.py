@@ -33,10 +33,34 @@ def teardown_request(exception):
 
 @app.route("/")
 def show_entries():
+    #args = []
     cur = g.db.execute('select ptime, username, reply  from dstshow')
     dstshows = [dict(ptime=row[0], username=row[1],reply=row[2]) for row in cur.fetchall()]
+    #cur_pitme = g.db.execute('select distinct ptime from dstshow')
     return render_template('dstshow.html', dstshows=dstshows)
 
+
+@app.template_filter('filter_by_time')
+def filter_time(x):
+    #print x
+    time_list = []
+    for i in x:
+       time = i['ptime']
+       time_list.append(time)
+    print 'time list',time_list
+    tmp_list = list(set(time_list))
+    new_list = sorted(tmp_list)
+    print 'new_list',new_list
+    return new_list
+
+
+@app.template_filter('filter_by_name')
+def filter_name(x,name):
+    new_x = []
+    for i in x:
+        if i['username'] == name:
+            new_x.append(i)
+    return new_x
 
 @app.route('/add', methods=['POST'])
 def add_entry():
@@ -61,9 +85,6 @@ def login():
             flash('You were logged in')
             return redirect(url_for('show_entries'))
     return render_template('login.html', error=error)
-
-
-
 
 @app.route('/logout')
 def logout():
